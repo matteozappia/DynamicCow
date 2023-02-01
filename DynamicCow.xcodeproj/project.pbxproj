@@ -13,6 +13,7 @@
 		2BEC6F0F296A5E3900741B6E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BEC6F0E296A5E3900741B6E /* Assets.xcassets */; };
 		2BEC6F12296A5E3900741B6E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BEC6F11296A5E3900741B6E /* Preview Assets.xcassets */; };
 		2BEC6F1B296A60A800741B6E /* poc.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEC6F19296A60A700741B6E /* poc.m */; };
+		6F75AD75298ABC4A009C0AD6 /* MachineName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F75AD74298ABC4A009C0AD6 /* MachineName.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		2BEC6F18296A60A700741B6E /* DynamicCow-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DynamicCow-Bridging-Header.h"; sourceTree = "<group>"; };
 		2BEC6F19296A60A700741B6E /* poc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = poc.m; sourceTree = "<group>"; };
 		2BEC6F1A296A60A700741B6E /* poc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = poc.h; sourceTree = "<group>"; };
+		6F75AD74298ABC4A009C0AD6 /* MachineName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachineName.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 		2BEC6F09296A5E3600741B6E /* DynamicCow */ = {
 			isa = PBXGroup;
 			children = (
+				6F75AD73298ABC40009C0AD6 /* Extensions */,
 				2BEC6F0A296A5E3600741B6E /* DynamicCowApp.swift */,
 				2BEC6F0C296A5E3600741B6E /* ContentView.swift */,
 				2BE81BC7296A8BCF00A4ECCA /* AppearanceCellView.swift */,
@@ -75,6 +78,14 @@
 				2BEC6F11296A5E3900741B6E /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		6F75AD73298ABC40009C0AD6 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				6F75AD74298ABC4A009C0AD6 /* MachineName.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -152,6 +163,7 @@
 				2BEC6F0D296A5E3600741B6E /* ContentView.swift in Sources */,
 				2BE81BC8296A8BCF00A4ECCA /* AppearanceCellView.swift in Sources */,
 				2BEC6F0B296A5E3600741B6E /* DynamicCowApp.swift in Sources */,
+				6F75AD75298ABC4A009C0AD6 /* MachineName.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

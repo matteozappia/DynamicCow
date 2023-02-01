@@ -16,7 +16,7 @@ struct ContentView: View {
     
     private let dynamicPath = "/var/containers/Shared/SystemGroup/systemgroup.com.apple.mobilegestaltcache/Library/Caches/com.apple.MobileGestalt.plist"
     
-    private let deviceSize = Int(UIScreen.main.nativeBounds.height)
+    @State private var deviceSize: Int = 0
     
     @State var checkedPro: Bool = false
     @State var checkedProMax: Bool = false
@@ -89,6 +89,7 @@ struct ContentView: View {
             }
             .padding()
             .onAppear{
+                deviceSize = getDefaultSubtype()
                 if currentSet == 2556{
                     checkedPro = true
                 }else if currentSet == 2796{
@@ -135,6 +136,78 @@ struct ContentView: View {
         let newData = try! PropertyListSerialization.data(fromPropertyList: newPlist, format: .binary, options: 0)
 
         overwriteFile(newData, plistPath)
+    }
+    
+    
+    // very messy but will not bootloop the device hopefully
+    func getDefaultSubtype() -> Int {
+        var deviceSubType: Int = UserDefaults.standard.integer(forKey: "OriginalDeviceSubType")
+        if deviceSubType == 0 {
+            var canUseStandardMethod: [String] = ["10,3", "10,4", "10,6", "11,2", "11,4", "11,6", "11,8", "12,1", "12,3", "12,5", "13,1", "13,2", "13,3", "13,4", "14,4", "14,5", "14,2", "14,3", "14,7", "14,8", "15,2"]
+            for (i, v) in canUseStandardMethod.enumerated() {
+                canUseStandardMethod[i] = "iPhone" + v
+            }
+            
+            let deviceModel: String = UIDevice().machineName
+            
+            if canUseStandardMethod.contains(deviceModel) {
+                // can use device bounds
+                deviceSubType = Int(UIScreen.main.nativeBounds.height)
+            } else {//else if specialCases[deviceModel] != nil {
+                //deviceSubType = specialCases[deviceModel]!
+                let url: URL? = URL(string: "https://raw.githubusercontent.com/matteozappia/DynamicCow/main/DefaultSubTypes.json")
+                if url != nil {
+                    // get the data of the file
+                    let task = URLSession.shared.dataTask(with: url!) { data, response, error in
+                        guard let data = data else {
+                            print("No data to decode")
+                            return
+                        }
+                        guard let subtypeData = try? JSONSerialization.jsonObject(with: data, options: []) else {
+                            print("Couldn't decode json data")
+                            return
+                        }
+                        
+                        // check if all the files exist
+                        if  let subtypeData = subtypeData as? Dictionary<String, AnyObject>, let deviceTypes = subtypeData["Default_SubTypes"] as? [String: Int] {
+                            if deviceTypes[deviceModel] != nil {
+                                // successfully found subtype
+                                deviceSubType = deviceTypes[deviceModel] ?? -1
+                            }
+                        }
+                    }
+                    task.resume()
+                }
+            }
+            
+            // set the subtype
+            if deviceSubType == 0 {
+                // get the current subtype
+                do {
+                    let url = URL(fileURLWithPath: "/var/containers/Shared/SystemGroup/systemgroup.com.apple.mobilegestaltcache/Library/Caches/com.apple.MobileGestalt.plist")
+                    let data = try Data(contentsOf: url)
+                    
+                    var plist = try! PropertyListSerialization.propertyList(from: data, format: nil) as! [String:Any]
+                    let origDeviceTypeURL = URL(fileURLWithPath: "/var/mobile/.DO-NOT-DELETE-TrollTools/.DO-NOT-DELETE-ArtworkDeviceSubTypeBackup")
+                    
+                    if !FileManager.default.fileExists(atPath: origDeviceTypeURL.path) {
+                        let currentType = ((plist["CacheExtra"] as? [String: Any] ?? [:])["oPeik/9e8lQWMszEjbPzng"] as? [String: Any] ?? [:])["ArtworkDeviceSubType"] as! Int
+                        deviceSubType = currentType
+                        let backupData = String(currentType).data(using: .utf8)!
+                        try backupData.write(to: origDeviceTypeURL)
+                    }
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+            if deviceSubType == 0 {
+                // do something
+                // for now just crash the app
+                exit(0)
+            }
+            UserDefaults.standard.set(deviceSubType, forKey: "OriginalDeviceSubType")
+        }
+        return deviceSubType
     }
     
     
