@@ -7,19 +7,9 @@ Enable Dynamic Island on every device that is running iOS 16.0 to 16.1.2 using t
 ## Screenshots
 <img src="/Images/IMG_2393.PNG" width="300" height="650"/> <img src="/Images/IMG_2392.PNG" width="300" height="650"/> <img src="/Images/IMG_2391.PNG" width="300" height="650"/> 
 
-## Know Issues
-> no fix at the moment.
-- In some devices (iPhone 11) along with Dynamic Island a red bar is displayed with a rdar error.
-
----
-
-> will be solved
-- If you fuck up manually the com.apple.MobileGestalt.plist the app will crash when you try to enable / disable the Dynamic Island.
 
 ## Troubleshoot
-At the moment the app does not have a troubleshoot section but I will implement it in the future, so it can repair the fucked up plist.
-
-For now I recommend using [this shortcut](https://routinehub.co/shortcut/4920/).
+The app now have a Troubleshoot section to restore the plist file, but if you want you can also use [this shortcut](https://routinehub.co/shortcut/4920/).
 
 The shortcut will "reset" the plist file to an initial state solving any kind of problem.
 
@@ -35,3 +25,9 @@ If you have one of the above listed iOS versions, please stay away from it cause
 - I deleted the issue section because of meaningless spam of some users.
 
 - I will keep you updated on [Twitter](https://twitter.com/aboutzeph) and on this readme about new features and bug fixes.
+
+## Credits
+- [leminlimez](https://github.com/leminlimez) for deviceSubType improvement.
+- [sourcelocation](https://github.com/sourcelocation) for ResSet16 methods.
+- [Little34306](https://github.com/Little34306) for red bar fix idea.
+- [FontOverwrite](https://github.com/ginsudev/WDBFontOverwrite) for exploit code.

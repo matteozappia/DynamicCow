@@ -9,8 +9,10 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @AppStorage("isEnabled") private var isEnabled: Bool = false
-    @AppStorage("currentSet") private var currentSet: Int = 0
+    @AppStorage(DynamicKeys.isEnabled.rawValue) private var isEnabled: Bool = false
+    @AppStorage(DynamicKeys.currentSet.rawValue) private var currentSet: Int = 0
+    @AppStorage(DynamicKeys.originalDeviceSubType.rawValue) private var originalDeviceSubType: Int = 0
+    
     
     @State private var isDoing: Bool = false
     
@@ -21,8 +23,15 @@ struct ContentView: View {
     @State var checkedPro: Bool = false
     @State var checkedProMax: Bool = false
     
+    @State var tappedOnSettings: Bool = false
+    
+    @State var shouldAlertDeviceSubTypeError: Bool = false
+    @State var shouldAlertPlistCorrupted: Bool = false
+    
+    @State var shouldRedBarFix: Bool = false
+    
     var body: some View {
-        NavigationView{
+        NavigationStack{
             VStack{
    
                 AppearanceCellView(checkedPro: $checkedPro, checkedProMax: $checkedProMax)
@@ -37,15 +46,17 @@ struct ContentView: View {
                     
                     let impact = UIImpactFeedbackGenerator(style: .medium)
                     impact.impactOccurred()
-                    
+    
                     if isEnabled{
                         //disable
-                        plistChange(plistPath: dynamicPath, key: "ArtworkDeviceSubType", value: deviceSize)
+                        plistChange(plistPath: dynamicPath, key: "ArtworkDeviceSubType", value: originalDeviceSubType)
                         currentSet = 0
-                        isDoing = true
-                        isEnabled = false
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 15){
-                            respring()
+                        if shouldRedBarFix{
+                            setResolution()
+                        }
+                        withAnimation{
+                            isDoing = true
+                            isEnabled = false
                         }
                         
                     }else{
@@ -53,14 +64,19 @@ struct ContentView: View {
                         if checkedProMax {
                             plistChange(plistPath: dynamicPath, key: "ArtworkDeviceSubType", value: 2796)
                             currentSet = 2796
+                            if shouldRedBarFix{
+                                setResolution()
+                            }
                         }else{
                             plistChange(plistPath: dynamicPath, key: "ArtworkDeviceSubType", value: 2556)
                             currentSet = 2556
+                            if shouldRedBarFix{
+                                setResolution()
+                            }
                         }
-                        isDoing = true
-                        isEnabled = true
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 15){
-                            respring()
+                        withAnimation{
+                            isDoing = true
+                            isEnabled = true
                         }
                         
                     }
@@ -89,16 +105,29 @@ struct ContentView: View {
             }
             .padding()
             .onAppear{
-                deviceSize = getDefaultSubtype()
                 if currentSet == 2556{
-                    checkedPro = true
+                    withAnimation{
+                        checkedPro = true
+                    }
                 }else if currentSet == 2796{
-                    checkedProMax = true
+                    withAnimation{
+                        checkedProMax = true
+                    }
                 }
             }
             
             .navigationTitle("DynamicCow")
             .toolbar {
+            
+                NavigationLink {
+                    SettingsView()
+                } label: {
+                    Image(systemName: "gear")
+                        .foregroundColor(.white)
+                }
+                .disabled(isDoing)
+                .opacity(isDoing ? 0.8 : 1)
+            
                 if !isDoing {
                     Image(systemName: isEnabled ? "checkmark.circle.fill" : "xmark.circle.fill")
                         .symbolRenderingMode(.hierarchical)
@@ -109,10 +138,84 @@ struct ContentView: View {
                     ProgressView()
                         .tint(.white)
                 }
+                    
+                
             }
-        }
+        }.tint(.white)
+            .onAppear{
+                grant_full_disk_access() { error in
+                            print(error?.localizedDescription as Any)
+                        }
+                deviceSize = getDefaultSubtype()
+                
+                switch UIDevice().machineName {
+                case "iPhone11,8":
+                    shouldRedBarFix = true
+                    break
+                case "iPhone12,1":
+                    shouldRedBarFix = true
+                    break
+                default:
+                    break
+                }
+                
+            }
+            .alert(isPresented: $shouldAlertDeviceSubTypeError) {
+                Alert(title: Text("Error"), message: Text("There was an error getting the deviceSubType, maybe your plist file is corrupted, please tap on Reset and reopen the app again.\nNote: Your device will respring."), dismissButton: .destructive(Text("Reset"),action: {
+                    // restore plist
+                    killMobileGestalt()
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0){
+                        respring()
+                    }
+                }))
+            }
+            .alert(isPresented: $shouldAlertPlistCorrupted) {
+                Alert(title: Text("Error"), message: Text("There was an error modyfing your plist file is corrupted, please tap on Reset and reopen the app again.\nNote: Your device will respring."), dismissButton: .destructive(Text("Reset"),action: {
+                    // restore plist
+                    killMobileGestalt()
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0){
+                        respring()
+                    }
+                }))
+            }
     }
     
+    func setResolution() {
+            do {
+                let tmpPlistURL = URL(fileURLWithPath: "/var/tmp/com.apple.iokit.IOMobileGraphicsFamily.plist")
+                try? FileManager.default.removeItem(at: tmpPlistURL)
+                
+                try createPlist(at: tmpPlistURL)
+                
+                let aliasURL = URL(fileURLWithPath: "/private/var/mobile/Library/Preferences/com.apple.iokit.IOMobileGraphicsFamily.plist")
+                try? FileManager.default.removeItem(at: aliasURL)
+                try FileManager.default.createSymbolicLink(at: aliasURL, withDestinationURL: tmpPlistURL)
+                
+                respring()
+            } catch {
+                UIApplication.shared.alert(body: error.localizedDescription)
+            }
+        }
+    
+    func createPlist(at url: URL) throws {
+        if isEnabled{
+                let 💀 : [String: Any] = [
+                    "canvas_height": 1792,
+                    "canvas_width": 828,
+                ]
+                let data = NSDictionary(dictionary: 💀)
+                data.write(toFile: url.path, atomically: true)
+        }else{
+            let 💀 : [String: Any] = [
+                "canvas_height": 1971,
+                "canvas_width": 911,
+            ]
+            let data = NSDictionary(dictionary: 💀)
+            data.write(toFile: url.path, atomically: true)
+        }
+        }
     
     func plistChange(plistPath: String, key: String, value: Int) {
         let stringsData = try! Data(contentsOf: URL(fileURLWithPath: plistPath))
@@ -129,20 +232,29 @@ struct ContentView: View {
             }
             return newDict
         }
-   
+        
         var newPlist = plist
         newPlist = changeValue(newPlist, key, value)
-    
+        
         let newData = try! PropertyListSerialization.data(fromPropertyList: newPlist, format: .binary, options: 0)
-
-        overwriteFile(newData, plistPath)
+        
+        if overwriteFile(originPath: plistPath, replacementData: newData) {
+            // all actions completed
+            DispatchQueue.main.asyncAfter(deadline: .now()){
+                respring()
+            }
+        } else {
+            // something went wrong
+            shouldAlertPlistCorrupted = true
+        }
     }
-    
     
     // very messy but will not bootloop the device hopefully
     func getDefaultSubtype() -> Int {
-        var deviceSubType: Int = UserDefaults.standard.integer(forKey: "OriginalDeviceSubType")
+        var deviceSubType: Int = originalDeviceSubType
+        
         if deviceSubType == 0 {
+            
             var canUseStandardMethod: [String] = ["10,3", "10,4", "10,6", "11,2", "11,4", "11,6", "11,8", "12,1", "12,3", "12,5", "13,1", "13,2", "13,3", "13,4", "14,4", "14,5", "14,2", "14,3", "14,7", "14,8", "15,2"]
             for (i, v) in canUseStandardMethod.enumerated() {
                 canUseStandardMethod[i] = "iPhone" + v
@@ -200,23 +312,108 @@ struct ContentView: View {
                     print(error.localizedDescription)
                 }
             }
+             
             if deviceSubType == 0 {
-                // do something
-                // for now just crash the app
-                exit(0)
+                withAnimation{
+                    shouldAlertDeviceSubTypeError = true
+                }
             }
-            UserDefaults.standard.set(deviceSubType, forKey: "OriginalDeviceSubType")
+            originalDeviceSubType = deviceSubType
         }
         return deviceSubType
     }
     
     
-    func respring(){
-        guard let window = UIApplication.shared.connectedScenes.compactMap({ ($0 as? UIWindowScene)?.keyWindow }).first else { return }
-        while true {
-           window.snapshotView(afterScreenUpdates: false)
+    
+    // Overwrite the system font with the given font using CVE-2022-46689.
+    // The font must be specially prepared so that it skips past the last byte in every 16KB page.
+    // See BrotliPadding.swift for an implementation that adds this padding to WOFF2 fonts.
+    // credit: FontOverwrite
+    func overwriteFile(originPath: String, replacementData: Data) -> Bool {
+    #if false
+        let documentDirectory = FileManager.default.urls(
+            for: .documentDirectory,
+            in: .userDomainMask
+        )[0].path
+        
+        let pathToRealTarget = originPath
+        let originPath = documentDirectory + originPath
+        let origData = try! Data(contentsOf: URL(fileURLWithPath: pathToRealTarget))
+        try! origData.write(to: URL(fileURLWithPath: originPath))
+    #endif
+        
+        // open and map original font
+        let fd = open(originPath, O_RDONLY | O_CLOEXEC)
+        if fd == -1 {
+            print("Could not open target file")
+            return false
         }
+        defer { close(fd) }
+        // check size of font
+        let originalFileSize = lseek(fd, 0, SEEK_END)
+        guard originalFileSize >= replacementData.count else {
+            print("Original file: \(originalFileSize)")
+            print("Replacement file: \(replacementData.count)")
+            print("File too big")
+            return false
+        }
+        lseek(fd, 0, SEEK_SET)
+        
+        // Map the font we want to overwrite so we can mlock it
+        let fileMap = mmap(nil, replacementData.count, PROT_READ, MAP_SHARED, fd, 0)
+        if fileMap == MAP_FAILED {
+            print("Failed to map")
+            return false
+        }
+        // mlock so the file gets cached in memory
+        guard mlock(fileMap, replacementData.count) == 0 else {
+            print("Failed to mlock")
+            return true
+        }
+        
+        // for every 16k chunk, rewrite
+        print(Date())
+        for chunkOff in stride(from: 0, to: replacementData.count, by: 0x4000) {
+            print(String(format: "%lx", chunkOff))
+            let dataChunk = replacementData[chunkOff..<min(replacementData.count, chunkOff + 0x4000)]
+            var overwroteOne = false
+            for _ in 0..<2 {
+                let overwriteSucceeded = dataChunk.withUnsafeBytes { dataChunkBytes in
+                    return unaligned_copy_switch_race(
+                        fd, Int64(chunkOff), dataChunkBytes.baseAddress, dataChunkBytes.count)
+                }
+                if overwriteSucceeded {
+                    overwroteOne = true
+                    break
+                }
+                print("try again?!")
+            }
+            guard overwroteOne else {
+                print("Failed to overwrite")
+                return false
+            }
+        }
+        print(Date())
+        return true
     }
+    
+    func respring(){
+        UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+
+            let view = UIView(frame: UIScreen.main.bounds)
+            view.backgroundColor = .black
+            view.alpha = 0
+
+            UIApplication.shared.connectedScenes.map({ $0 as? UIWindowScene }).compactMap({ $0 }).first!.windows.first!.addSubview(view)
+            UIView.animate(withDuration: 0.2, delay: 0, animations: {
+                view.alpha = 1
+            })
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
+                respringBackboard()
+            })
+    }
+
     
 }
 

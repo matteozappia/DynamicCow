@@ -7,16 +7,32 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B5854FA296E30B0007E0150 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5854F9296E30B0007E0150 /* SettingsView.swift */; };
+		2B585500296E6FCE007E0150 /* DynamicKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5854FF296E6FCE007E0150 /* DynamicKeys.swift */; };
+		2BBD18E62988D60C007B1FC3 /* grant_full_disk_access.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BBD18E42988D60C007B1FC3 /* grant_full_disk_access.m */; };
+		2BBD18E72988D60C007B1FC3 /* helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BBD18E52988D60C007B1FC3 /* helpers.m */; };
+		2BBD18EA2988D6A8007B1FC3 /* vm_unaligned_copy_switch_race.c in Sources */ = {isa = PBXBuildFile; fileRef = 2BBD18E82988D6A8007B1FC3 /* vm_unaligned_copy_switch_race.c */; };
+		2BBD18F0298B4691007B1FC3 /* MachineName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBD18EF298B4691007B1FC3 /* MachineName.swift */; };
+		2BC2E468298C0F6F00170405 /* Alert++.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC2E467298C0F6F00170405 /* Alert++.swift */; };
 		2BE81BC8296A8BCF00A4ECCA /* AppearanceCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE81BC7296A8BCF00A4ECCA /* AppearanceCellView.swift */; };
 		2BEC6F0B296A5E3600741B6E /* DynamicCowApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEC6F0A296A5E3600741B6E /* DynamicCowApp.swift */; };
 		2BEC6F0D296A5E3600741B6E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEC6F0C296A5E3600741B6E /* ContentView.swift */; };
 		2BEC6F0F296A5E3900741B6E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BEC6F0E296A5E3900741B6E /* Assets.xcassets */; };
 		2BEC6F12296A5E3900741B6E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BEC6F11296A5E3900741B6E /* Preview Assets.xcassets */; };
-		2BEC6F1B296A60A800741B6E /* poc.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEC6F19296A60A700741B6E /* poc.m */; };
-		6F75AD75298ABC4A009C0AD6 /* MachineName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F75AD74298ABC4A009C0AD6 /* MachineName.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2B5854F9296E30B0007E0150 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		2B5854FF296E6FCE007E0150 /* DynamicKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicKeys.swift; sourceTree = "<group>"; };
+		2BBD18E22988D60C007B1FC3 /* helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = helpers.h; sourceTree = "<group>"; };
+		2BBD18E32988D60C007B1FC3 /* grant_full_disk_access.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = grant_full_disk_access.h; sourceTree = "<group>"; };
+		2BBD18E42988D60C007B1FC3 /* grant_full_disk_access.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = grant_full_disk_access.m; sourceTree = "<group>"; };
+		2BBD18E52988D60C007B1FC3 /* helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = helpers.m; sourceTree = "<group>"; };
+		2BBD18E82988D6A8007B1FC3 /* vm_unaligned_copy_switch_race.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = vm_unaligned_copy_switch_race.c; sourceTree = "<group>"; };
+		2BBD18E92988D6A8007B1FC3 /* vm_unaligned_copy_switch_race.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vm_unaligned_copy_switch_race.h; sourceTree = "<group>"; };
+		2BBD18EB2988DA67007B1FC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		2BBD18EF298B4691007B1FC3 /* MachineName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MachineName.swift; sourceTree = "<group>"; };
+		2BC2E467298C0F6F00170405 /* Alert++.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Alert++.swift"; sourceTree = "<group>"; };
 		2BE81BC7296A8BCF00A4ECCA /* AppearanceCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceCellView.swift; sourceTree = "<group>"; };
 		2BEC6F07296A5E3600741B6E /* DynamicCow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DynamicCow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BEC6F0A296A5E3600741B6E /* DynamicCowApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicCowApp.swift; sourceTree = "<group>"; };
@@ -24,9 +40,6 @@
 		2BEC6F0E296A5E3900741B6E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2BEC6F11296A5E3900741B6E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2BEC6F18296A60A700741B6E /* DynamicCow-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DynamicCow-Bridging-Header.h"; sourceTree = "<group>"; };
-		2BEC6F19296A60A700741B6E /* poc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = poc.m; sourceTree = "<group>"; };
-		2BEC6F1A296A60A700741B6E /* poc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = poc.h; sourceTree = "<group>"; };
-		6F75AD74298ABC4A009C0AD6 /* MachineName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachineName.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +53,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2BBD18EE298B4691007B1FC3 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				2BC2E467298C0F6F00170405 /* Alert++.swift */,
+				2B5854FF296E6FCE007E0150 /* DynamicKeys.swift */,
+				2BBD18EF298B4691007B1FC3 /* MachineName.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		2BBD18F1298B469D007B1FC3 /* Exploit */ = {
+			isa = PBXGroup;
+			children = (
+				2BBD18E32988D60C007B1FC3 /* grant_full_disk_access.h */,
+				2BBD18E42988D60C007B1FC3 /* grant_full_disk_access.m */,
+				2BBD18E82988D6A8007B1FC3 /* vm_unaligned_copy_switch_race.c */,
+				2BBD18E92988D6A8007B1FC3 /* vm_unaligned_copy_switch_race.h */,
+				2BBD18E22988D60C007B1FC3 /* helpers.h */,
+				2BBD18E52988D60C007B1FC3 /* helpers.m */,
+			);
+			path = Exploit;
+			sourceTree = "<group>";
+		};
 		2BEC6EFE296A5E3600741B6E = {
 			isa = PBXGroup;
 			children = (
@@ -59,12 +95,13 @@
 		2BEC6F09296A5E3600741B6E /* DynamicCow */ = {
 			isa = PBXGroup;
 			children = (
-				6F75AD73298ABC40009C0AD6 /* Extensions */,
+				2BBD18F1298B469D007B1FC3 /* Exploit */,
+				2BBD18EE298B4691007B1FC3 /* Extensions */,
+				2BBD18EB2988DA67007B1FC3 /* Info.plist */,
 				2BEC6F0A296A5E3600741B6E /* DynamicCowApp.swift */,
 				2BEC6F0C296A5E3600741B6E /* ContentView.swift */,
+				2B5854F9296E30B0007E0150 /* SettingsView.swift */,
 				2BE81BC7296A8BCF00A4ECCA /* AppearanceCellView.swift */,
-				2BEC6F1A296A60A700741B6E /* poc.h */,
-				2BEC6F19296A60A700741B6E /* poc.m */,
 				2BEC6F18296A60A700741B6E /* DynamicCow-Bridging-Header.h */,
 				2BEC6F0E296A5E3900741B6E /* Assets.xcassets */,
 				2BEC6F10296A5E3900741B6E /* Preview Content */,
@@ -78,14 +115,6 @@
 				2BEC6F11296A5E3900741B6E /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		6F75AD73298ABC40009C0AD6 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				6F75AD74298ABC4A009C0AD6 /* MachineName.swift */,
-			);
-			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -159,11 +188,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2BEC6F1B296A60A800741B6E /* poc.m in Sources */,
+				2BC2E468298C0F6F00170405 /* Alert++.swift in Sources */,
+				2B5854FA296E30B0007E0150 /* SettingsView.swift in Sources */,
+				2BBD18E72988D60C007B1FC3 /* helpers.m in Sources */,
 				2BEC6F0D296A5E3600741B6E /* ContentView.swift in Sources */,
 				2BE81BC8296A8BCF00A4ECCA /* AppearanceCellView.swift in Sources */,
+				2BBD18F0298B4691007B1FC3 /* MachineName.swift in Sources */,
+				2BBD18E62988D60C007B1FC3 /* grant_full_disk_access.m in Sources */,
+				2BBD18EA2988D6A8007B1FC3 /* vm_unaligned_copy_switch_race.c in Sources */,
 				2BEC6F0B296A5E3600741B6E /* DynamicCowApp.swift in Sources */,
-				6F75AD75298ABC4A009C0AD6 /* MachineName.swift in Sources */,
+				2B585500296E6FCE007E0150 /* DynamicKeys.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,12 +324,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"DynamicCow/Preview Content\"";
 				DEVELOPMENT_TEAM = JDQ47NFW25;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DynamicCow/Info.plist;
+				INFOPLIST_KEY_NSAppleMusicUsageDescription = "In order to reset the plist file to its initial state in case of file corruption DynamicCow needs access sandbox.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -306,9 +343,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.zeph.DynamicCow;
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zeph.DynamicCoww;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "DynamicCow/DynamicCow-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -323,12 +361,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"DynamicCow/Preview Content\"";
 				DEVELOPMENT_TEAM = JDQ47NFW25;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DynamicCow/Info.plist;
+				INFOPLIST_KEY_NSAppleMusicUsageDescription = "In order to reset the plist file to its initial state in case of file corruption DynamicCow needs access sandbox.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -339,9 +380,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.zeph.DynamicCow;
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zeph.DynamicCoww;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "DynamicCow/DynamicCow-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;

@@ -33,10 +33,12 @@ struct AppearanceCellView: View {
                         
                     }//.padding()
                     .onTapGesture {
-                        let impact = UIImpactFeedbackGenerator(style: .light)
-                        impact.impactOccurred()
-                        checkedProMax = false
-                        self.checkedPro = true
+                        withAnimation{
+                            let impact = UIImpactFeedbackGenerator(style: .light)
+                            impact.impactOccurred()
+                            checkedProMax = false
+                            self.checkedPro = true
+                        }
                     }
                     
                     
@@ -59,10 +61,12 @@ struct AppearanceCellView: View {
                         
                     }//.padding()
                     .onTapGesture {
-                        let impact = UIImpactFeedbackGenerator(style: .light)
-                          impact.impactOccurred()
-                        checkedPro = false
-                        self.checkedProMax = true
+                        withAnimation{
+                            let impact = UIImpactFeedbackGenerator(style: .light)
+                            impact.impactOccurred()
+                            checkedPro = false
+                            self.checkedProMax = true
+                        }
                     }
                     
                 }
