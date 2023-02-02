@@ -29,5 +29,5 @@ If you have one of the above listed iOS versions, please stay away from it cause
 ## Credits
 - [leminlimez](https://github.com/leminlimez) for deviceSubType improvement.
 - [sourcelocation](https://github.com/sourcelocation) for ResSet16 methods.
-- [Little34306](https://github.com/Little34306) for red bar fix idea.
+- [Little34306](https://github.com/34306) for red bar fix idea.
 - [FontOverwrite](https://github.com/ginsudev/WDBFontOverwrite) for exploit code.
